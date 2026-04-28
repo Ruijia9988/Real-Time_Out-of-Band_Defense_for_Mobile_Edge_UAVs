@@ -6,7 +6,7 @@
 clear; clc; close all;
 rng(42, 'twister');
 try
-    data = load('pure_power_traces.mat');
+    data = load('data_path');
     raw_clean_batch  = data.trace_clean;  
     raw_poison_batch = data.trace_poison;
     raw_robust_batch = data.trace_robust;
@@ -86,9 +86,6 @@ for level = 1:size(noise_profiles, 1)
             VRM_Freq_Hz, vrm_amp, noise_r, phase_r, INA240_Offset_A, ...
             Analog_Bandwidth_Hz, LSB_Amps, Max_Measurable_Amps, Min_Measurable_Amps);
     end
-    
-    filename = sprintf('hfvp_traces_level%d.mat', level);
-    save(filename, 'hardware_clean', 'hardware_poison', 'hardware_robust', 'adc_time');
 end
 
 % =========================================================
