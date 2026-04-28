@@ -1,6 +1,6 @@
 """
 Script Description:
-    Strictly Calibrated Digital Twin Power Extractor (YOLOv10 / MobileNetV3).
+    Strictly Calibrated Digital Twin Power Extractor (YOLOv5n).
     - Architecture: NVIDIA Jetson Orin Nano 8GB (Ampere, Samsung 8nm).
 """
 
