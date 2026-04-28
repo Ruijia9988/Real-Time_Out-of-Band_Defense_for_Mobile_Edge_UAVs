@@ -1,16 +1,20 @@
 # [Real-Time Power Side-Channel Defense Against UAV Vision Backdoors: Physics-Aware Digital Twin]
 
-This repository contains the core implementation of the PADT framework and SSP defense architecture proposed in our paper.
+This repository contains the core implementation of the **[PADT framework]** and **[SSP defense architecture]** proposed in our paper.
 
 ---
 
 ### Repository Structure
-* **`MyProject/Python/ensemblelearning.py`**: Core implementation of the defense architecture.
-* **`MyProject/Python/*-ssc.py`**: Task simulation scripts for generating power consumption traces on the Jetson Orin Nano.
-* **`MyProject/Matlab/`**: Simulated STM32H743 power consumption data of Jetson core board during operation was collected using INA240A2.
-* **`MyProject/Data/`**: A representative subset of experimental results (Partial).
+* **`MyProject/Python/ensemblelearning.py`**: The core code of the defense architecture implementation.
+* **`MyProject/Python/*-ssc.py`**: Power consumption data from parameterized simulations of different models on the Jetson Orin Nano.
+* **`MyProject/Matlab/`**: Scripts for simulating the STM32H743 and INA240A2 acquisition process to collect power consumption data.
+* **`MyProject/Data/`**: A partial set of experimental results.
+
 ---
 
-**The full dataset, complete codebase, and pre-trained models will be made publicly available upon formal publication.**
+### Note
+The **full dataset**, **complete codebase**, and **pre-trained models** will be made publicly available upon formal publication. 
+
+For the blind review process, this repository provides the necessary logic and simulated data to verify the proposed framework's feasibility.
 
 ---
