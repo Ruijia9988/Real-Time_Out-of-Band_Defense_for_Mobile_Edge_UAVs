@@ -1,0 +1,46 @@
+# Model-YOLOv10l
+# Usage: pip install -r requirements.txt
+#  ------------------------------------------------------------------------
+torch>=2.0.0
+torchvision>=0.15.0
+onnx>=1.14.0
+onnxruntime-gpu>=1.15.0 
+pycocotools>=2.0.0
+PyYAML>=6.0
+scipy>=1.8.0
+gradio>=4.0.0
+opencv-python>=4.8.0
+psutil>=5.9.0
+py-cpuinfo>=9.0.0
+huggingface-hub>=0.19.0
+safetensors>=0.4.0
+tqdm>=4.64.0  
+matplotlib>=3.7.0  
+pillow>=10.0.0  
+seaborn>=0.12.0  
+pandas>=2.0.0  
+
+
+
+# Model-YOLOv5n & MobileNetV3-Small
+# Usage: pip install -r requirements.txt
+# ------------------------------------------------------------------------
+gitpython>=3.1.30
+matplotlib>=3.3
+numpy>=1.23.5
+opencv-python>=4.1.1
+pillow>=10.3.0
+psutil 
+PyYAML>=5.3.1
+requests>=2.32.2
+scipy>=1.4.1
+thop>=0.1.1  
+torch>=1.8.0  
+torchvision>=0.9.0
+tqdm>=4.66.3
+ultralytics>=8.2.64  
+pandas>=1.1.4
+seaborn>=0.11.0
+packaging 
+setuptools>=70.0.0
+urllib3>=2.5.0 ; python_version > "3.8" # not directly required, pinned by Snyk to avoid a vulnerability
