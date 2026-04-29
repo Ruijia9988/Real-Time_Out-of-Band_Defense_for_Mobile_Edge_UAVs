@@ -33,7 +33,7 @@ MODEL_CONFIGS = {
     }
 }
 
-BASE_PATH = './Project/matlab&simulink/'
+BASE_PATH = './Project/'
 
 def extract_robust_lightweight_features(traces, roi_end, pool_bins):
     """
