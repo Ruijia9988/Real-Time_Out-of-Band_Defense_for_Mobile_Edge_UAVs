@@ -11,7 +11,7 @@ try
     raw_poison_batch = data.trace_poison;
     raw_robust_batch = data.trace_robust;
 catch
-    error('pure_power_traces.mat not found!');
+    error('file not found!');
 end
 
 %% Sensor Link Physical Constraints (TI INA240A2 + STM32H743)
