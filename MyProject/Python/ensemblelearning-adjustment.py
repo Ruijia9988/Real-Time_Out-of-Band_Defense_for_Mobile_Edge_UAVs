@@ -6,6 +6,27 @@ UART_BAUD_RATE_BPS = 1_000_000.0
 MAVLINK_PACKET_BYTES = 47.0  
 FCC_PHYSICAL_DEADZONE_US = 800.0 
 
+def estimate_stm32_resource_overhead(roi_end, total_dim, t_dsp_us, t_ml_us, fps=60.0, cpu_freq_hz=STM32_SYSCLK_HZ):
+    frame_period_us = 1_000_000.0 / fps
+    compute_time_us = t_dsp_us + t_ml_us
+    dsp_cycles = t_dsp_us * cpu_freq_hz / 1_000_000.0
+    ml_cycles = t_ml_us * cpu_freq_hz / 1_000_000.0
+    total_compute_cycles = dsp_cycles + ml_cycles
+    frame_duty_ratio = (compute_time_us / frame_period_us) * 100.0
+    cycles_per_second = total_compute_cycles * fps
+    cpu_utilization = (cycles_per_second / cpu_freq_hz) * 100.0
+
+    return {
+        "frame_period_us": frame_period_us,
+        "compute_time_us": compute_time_us,
+        "dsp_cycles": dsp_cycles,
+        "ml_cycles": ml_cycles,
+        "total_compute_cycles": total_compute_cycles,
+        "cycles_per_second": cycles_per_second,
+        "frame_duty_ratio": frame_duty_ratio,
+        "cpu_utilization": cpu_utilization
+    }
+
 def extract_robust_lightweight_features(traces, roi_end, pool_bins):
     actual_roi_end = min(roi_end, traces.shape[1])
     roi_traces = traces[:, 0:actual_roi_end]
