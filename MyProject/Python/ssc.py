@@ -140,7 +140,7 @@ class HardwareCalibratedPowerMapper:
         self.peak_bandwidth_B_s = 68.0 * 1e9    # 68 GB/s ---> LPDDR5 memory bandwidth: 68 GB of data read/write per second
         self.rail_voltage_V = 5.0               # 5V power supply ---> External power supply voltage (DC power supply)
         self.vrm_efficiency = 0.85  # Voltage regulator efficiency 85%
-        self.l2_cache_capacity_bytes = 2.0 * 1024 * 1024    # 2 MB
+        self.l2_cache_capacity_bytes = 2.0 * 1024 * 1024    # 2 MiB
         self.u_eff_compute = 0.75  # Calculation utilization rate 75%
         self.u_eff_mem = 0.65      # Memory utilization 65%
         self.static_power_W = 2.6
