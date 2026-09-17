@@ -1,4 +1,4 @@
-# [Real-Time Power Side-Channel Defense Against UAV Vision Backdoors: Physics-Aware Digital Twin]
+# [Real-Time Out-of-Band Defense for Mobile Edge UAVs: A Physics-Aware Digital Twin Power Side-Channel Architecture Against Vision Backdoors]
 
 This repository contains the core implementation of the **PADT framework** and **SSP defense architecture** proposed in our paper.
 
