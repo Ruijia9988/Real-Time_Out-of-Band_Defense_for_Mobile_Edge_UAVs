@@ -12,9 +12,3 @@ This repository contains the core implementation of the **PADT framework** and *
 
 ---
 
-### Note
-The **full dataset**, **complete codebase**, and **pre-trained models** will be made publicly available upon formal publication. 
-
-For the blind review process, this repository provides the necessary logic and simulated data to verify the proposed framework's feasibility.
-
----
