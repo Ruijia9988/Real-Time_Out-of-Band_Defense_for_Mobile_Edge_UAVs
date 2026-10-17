@@ -1,31 +1,7 @@
 # This script is used to supplement and replace certain functions in the previous version of the Python script.
 
-STM32_SYSCLK_HZ = 480_000_000.0  
-FPU_CYCLES_PER_FLOP = 1.0  
-UART_BAUD_RATE_BPS = 1_000_000.0  
-MAVLINK_PACKET_BYTES = 47.0  
-FCC_PHYSICAL_DEADZONE_US = 800.0 
-
 def estimate_stm32_resource_overhead(roi_end, total_dim, t_dsp_us, t_ml_us, fps=60.0, cpu_freq_hz=STM32_SYSCLK_HZ):
-    frame_period_us = 1_000_000.0 / fps
-    compute_time_us = t_dsp_us + t_ml_us
-    dsp_cycles = t_dsp_us * cpu_freq_hz / 1_000_000.0
-    ml_cycles = t_ml_us * cpu_freq_hz / 1_000_000.0
-    total_compute_cycles = dsp_cycles + ml_cycles
-    frame_duty_ratio = (compute_time_us / frame_period_us) * 100.0
-    cycles_per_second = total_compute_cycles * fps
-    cpu_utilization = (cycles_per_second / cpu_freq_hz) * 100.0
-
-    return {
-        "frame_period_us": frame_period_us,
-        "compute_time_us": compute_time_us,
-        "dsp_cycles": dsp_cycles,
-        "ml_cycles": ml_cycles,
-        "total_compute_cycles": total_compute_cycles,
-        "cycles_per_second": cycles_per_second,
-        "frame_duty_ratio": frame_duty_ratio,
-        "cpu_utilization": cpu_utilization
-    }
+    pass
 
 def extract_robust_lightweight_features(traces, roi_end, pool_bins):
     actual_roi_end = min(roi_end, traces.shape[1])
@@ -54,20 +30,7 @@ def extract_robust_lightweight_features(traces, roi_end, pool_bins):
     return np.column_stack([f_std, f_p2p, f_auc, envelope_mean, envelope_max])
 
 def calculate_stm32_theoretical_latency(roi_end, total_dim, ml_type="linear"):
-    dsp_flops = roi_end * 14.0
-    time_dsp_us = (dsp_flops * FPU_CYCLES_PER_FLOP / STM32_SYSCLK_HZ) * 1_000_000.0
-    if ml_type == "linear":
-        ml_flops = total_dim * 2.0
-    elif ml_type == "tree":
-        ml_flops = 100 * 5 * 2.0
-    elif ml_type == "ensemble":
-        ml_flops = (total_dim * 2.0 * 2) + (100 * 5 * 2.0) + (3 * 2.0)
-    elif ml_type == "baseline":
-        ml_flops = 2.0
-    else:
-        ml_flops = 0.0
-    time_ml_us = (ml_flops / STM32_SYSCLK_HZ) * 1_000_000.0
-    return time_dsp_us, time_ml_us
+    pass
 
 def evaluate_model_architecture(model_name, config):
     total_dim = 3 + config['pool_bins'] * 2
@@ -163,6 +126,3 @@ def evaluate_model_architecture(model_name, config):
                   std_acc_single_LogReg_L1, std_acc_single_LightGBM]
         cirobj2 = [mean_fpr_single_LDA, mean_fpr_single_LogReg_L1, mean_fpr_single_LightGBM, std_fpr_single_LDA,
                    std_fpr_single_LogReg_L1, std_fpr_single_LightGBM]
-        for i in range(3):
-            print(f"  Bal-Acc-Single-{Single_name[i]}: {cirobj1[i] * 100:.2f}% ± {cirobj1[i+3] * 100:.2f}%")
-            print(f"  FPR-{Single_name[i]}:     {cirobj2[i]:.2f}% ± {cirobj2[i+3]:.2f}%")
