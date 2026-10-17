@@ -4,40 +4,6 @@ Script Description:
     - Architecture: NVIDIA Jetson Orin Nano 8GB (Ampere, Samsung 8nm).
 """
 
-import torch
-import torch.nn as nn
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-from tqdm import tqdm
-import scipy.io
-import os
-from utils.dataloaders import LoadImages
-from utils.torch_utils import select_device
-import torch.nn.functional as F
-
-mpl.rcParams['font.family'] = 'serif'
-mpl.rcParams['font.serif'] = ['Times New Roman']
-mpl.rcParams['axes.titlesize'] = 14
-mpl.rcParams['axes.labelsize'] = 12
-mpl.rcParams['figure.dpi'] = 300
-
-CLEAN_PATH = 'cp.pt'
-POISON_PATH = 'pp.pt'
-ROBUST_PATH = 'rp.pt'
-DATA_SOURCE = './images'
-DEVICE = 'cuda:0'
-
-NUM_CALIBRATION_SAMPLES = 200
-NUM_EVAL_SAMPLES = [2158, 10084]
-SIMULATE_INT8_CLIPPING = True
-PAD_VALUE = 0.447
-
-
-# Explicitly define data precision (INT8 quantization model, 1 byte per element)
-PRECISION_BYTES = 1.0
-
-
 # Feature Extractor
 class PowerSimulator:
     def __init__(self, model_path, device, model_name, is_calibration=False):
@@ -134,20 +100,7 @@ class PowerSimulator:
 # Heuristic Power Mapper
 class HardwareCalibratedPowerMapper:
     def __init__(self, target_fps=60):
-        self.sample_rate = 2000000.0   # 2 MHz sampling rate
-        self.frame_interval_samples = int((1.0 / target_fps) * self.sample_rate)
-        self.hardware_dense_tops = 20.0 * 1e12  # 20 TOPS
-        self.peak_bandwidth_B_s = 68.0 * 1e9    # 68 GB/s ---> LPDDR5 memory bandwidth: 68 GB of data read/write per second
-        self.rail_voltage_V = 5.0               # 5V power supply ---> External power supply voltage (DC power supply)
-        self.vrm_efficiency = 0.85  # Voltage regulator efficiency 85%
-        self.l2_cache_capacity_bytes = 2.0 * 1024 * 1024    # 2 MiB
-        self.u_eff_compute = 0.75  # Calculation utilization rate 75%
-        self.u_eff_mem = 0.65      # Memory utilization 65%
-        self.static_power_W = 2.6
-        self.static_current_A = self.static_power_W / self.rail_voltage_V
-        self.energy_per_mac_J = 0.23e-12    # 0.23 pJ/MAC
-        self.energy_per_dram_byte_J = 36.0e-12  # 36 pJ/byte
-        self.energy_per_sram_byte_J = 5.0e-12   # 5 pJ/byte
+        pass 
 
     def synthesize_trace(self, layer_stats, frame_seed):
         if not layer_stats:
